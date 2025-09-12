@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 export function createScene() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
@@ -9,7 +9,7 @@ export function createScene() {
     5000
   );
   camera.position.set(0, 300, 800);
-
+  
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -17,15 +17,10 @@ export function createScene() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   document.getElementById('app').appendChild(renderer.domElement);
-
-  // Responsivo 
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-  return { scene, camera, renderer };
+  const controls = new OrbitControls(camera, renderer.domElement);
+   controls.enableDamping = true;
+  return { scene, camera, renderer,controls };
+  
 }
 
 export function createStars(scene) {
