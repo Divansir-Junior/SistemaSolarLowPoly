@@ -18,6 +18,13 @@ export function createScene() {
 
   document.getElementById('app').appendChild(renderer.domElement);
 
+  // Responsivo 
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
   return { scene, camera, renderer };
 }
 

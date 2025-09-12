@@ -6,6 +6,13 @@ function init() {
   createLights(scene);
   createStars(scene);
 
+    // Responsividade
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
