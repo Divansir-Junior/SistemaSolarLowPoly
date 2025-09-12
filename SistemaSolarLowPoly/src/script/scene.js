@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 export function createScene() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
@@ -19,7 +20,8 @@ export function createScene() {
   document.getElementById('app').appendChild(renderer.domElement);
   const controls = new OrbitControls(camera, renderer.domElement);
    controls.enableDamping = true;
-  return { scene, camera, renderer,controls };
+   
+  return { scene, camera, renderer,controls, createSun  };
   
 }
 
