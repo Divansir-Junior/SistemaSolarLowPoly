@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-
+import {lights} from './lights.js';
 function init() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 5000);
@@ -11,6 +11,7 @@ function init() {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById('app').appendChild(renderer.domElement);
+  createLights();
 }
 
 init();
