@@ -21,7 +21,7 @@ export function createScene() {
   const controls = new OrbitControls(camera, renderer.domElement);
    controls.enableDamping = true;
    
-  return { scene, camera, renderer,controls, createSun  };
+  return { scene, camera, renderer,controls};
   
 }
 
