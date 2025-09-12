@@ -1,5 +1,12 @@
+import * as THREE from 'three';
 
-export function createLights() {
+export function createLights(scene) {
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
   scene.add(ambientLight);
+
+  const sunLight = new THREE.PointLight(0xffffaa, 3, 2000);
+  sunLight.position.set(0, 0, 0);
+  scene.add(sunLight);
+
+  return { ambientLight, sunLight };
 }
