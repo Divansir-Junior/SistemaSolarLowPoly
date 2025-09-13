@@ -14,5 +14,4 @@ export function createSun (scene) {
 
 export function loadPlanets( scene ) {
     const createdPlanet = {};
-    const planetsData =[]
 }
