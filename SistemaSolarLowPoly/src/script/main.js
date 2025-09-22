@@ -1,12 +1,13 @@
 import { createScene, createStars } from './scene.js';
 import { createLights } from './lights.js';
-import { createSun } from './planets.js';
+import { createSun, loadPlanets } from './planets.js';
 
 function init() {
   const { scene, camera, renderer } = createScene();
   createLights(scene);
   createStars(scene);
   createSun(scene)
+  loadPlanets(scene);
  
 
     // Responsividade
