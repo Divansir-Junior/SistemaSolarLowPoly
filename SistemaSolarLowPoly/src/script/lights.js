@@ -4,11 +4,12 @@ export function createLights(scene) {
   const ambientLight = new THREE.AmbientLight(0xffffff, 2);
   scene.add(ambientLight);
 
-  const sunLight = new THREE.PointLight(0xffffaa, 3, 2000);
-  sunLight.position.set(0, 0, 0);
-  scene.add(sunLight);
+  const fillLight = new THREE.DirectionalLight(0x88aaff, 15);
+  fillLight.position.set(-500, 300, 500);
+  scene.add(fillLight);
 
-  return { ambientLight, sunLight };
+
+  return { ambientLight ,fillLight};
  
 }
 

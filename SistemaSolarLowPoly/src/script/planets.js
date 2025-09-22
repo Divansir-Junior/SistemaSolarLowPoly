@@ -18,9 +18,9 @@ export function loadPlanets(scene) {
     const createdPlanets = {};
 
     const Planets = {
-        Mercury: { path: "models/Mercury.glb", scale: 0.5, position: [30, 0, 0] },
-        Venus:   { path: "models/Venus.glb", scale: 0.7, position: [50, 0, 0] },
-        Earth:   { path: "models/Earth.glb", scale: 0.8, position: [70, 0, 0] },
+        Mercury: { path: "models/Mercury.glb", scale: 100, position: [300, 0, 0] },
+        Venus:   { path: "models/Venus.glb", scale: 0.2, position: [400, 0, 0] },
+        Earth:   { path: "models/Earth.glb", scale: 0.8, position: [900, 0, 0] },
         Mars:    { path: "models/Mars.glb", scale: 0.6, position: [10, 0, 0] },
         Jupiter: { path: "models/Jupiter.glb", scale: 1.5, position: [120, 0, 0] },
         Saturn:  { path: "models/Saturn.glb", scale: 1.2, position: [150, 0, 0] },
