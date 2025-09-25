@@ -31,9 +31,9 @@ export function createStars(scene) {
   const positions = [];
 
   for (let i = 0; i < starCount; i++) {
-    const x = (Math.random() - 0.5) * 2000;
-    const y = (Math.random() - 0.5) * 2000;
-    const z = (Math.random() - 0.5) * 2000;
+    const x = (Math.random() - 0.5) * 8000;
+const y = (Math.random() - 0.5) * 8000;
+const z = (Math.random() - 0.5) * 8000;
     positions.push(x, y, z);
   }
 

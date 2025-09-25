@@ -20,12 +20,12 @@ export function loadPlanets(scene) {
     const Planets = {
         Mercury: { path: "models/Mercury.glb", scale: 100, position: [300, 0, 0] },
         Venus:   { path: "models/Venus.glb", scale: 0.2, position: [400, 0, 0] },
-        Earth:   { path: "models/Earth.glb", scale: 0.8, position: [900, 0, 0] },
-        Mars:    { path: "models/Mars.glb", scale: 0.6, position: [10, 0, 0] },
-        Jupiter: { path: "models/Jupiter.glb", scale: 1.5, position: [120, 0, 0] },
-        Saturn:  { path: "models/Saturn.glb", scale: 1.2, position: [150, 0, 0] },
-        Uranus:  { path: "models/Uranus.glb", scale: 1.0, position: [180, 0, 0] },
-        Neptune: { path: "models/Neptune.glb", scale: 1.0, position: [210, 0, 0] },
+        Earth:   { path: "models/Earth and Moon.glb", scale: 322, position: [570, 0, 0] },
+        Mars:    { path: "models/Mars.glb", scale: 0.3, position: [715, 0, 0] },
+        Jupiter: { path: "models/Jupiter.glb", scale: 250, position: [900, 0, 0] },
+        Saturn:  { path: "models/Saturn.glb", scale: 250, position: [1270, 0, 0] },
+        Uranus:  { path: "models/Uranus.glb", scale: 1.0, position: [7780, 0, 0] },
+        Neptune: { path: "models/Neptune.glb", scale: 1.0, position: [7710, 0, 0] },
     };
 
     function setupPlanet(name, config) {
