@@ -6,6 +6,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 const loader = new GLTFLoader();
 
 let sun = null;
+let Mercury = null;
+let Venus = null;
+let Earth = null;
+let Mars = null;
+let Jupiter = null;
+let Saturn = null;
+let Uranus = null;
+let Neptune = null;
 
 // --- Criar o Sol ---
 export function createSun(scene) {
@@ -21,12 +29,20 @@ export function createSun(scene) {
 
 export function animatePlanets() {
     if (sun) sun.rotation.y += 0.002;
+    if (Mercury) Mercury.rotation.y += 1000;
+    if (Venus) Venus.rotation.y += 0.002;
+    if (Earth) Earth.rotation.y += 0.02;
+    if (Mars) Mars.rotation.y += 0.018;
+    if (Jupiter) Jupiter.rotation.y += 0.04;
+    if (Saturn) Saturn.rotation.y += 0.038;
+    if (Uranus) Uranus.rotation.y += 0.03;
+    if (Neptune) Neptune.rotation.y += 0.032;
 }
 
 // --- Criar os planetas ---
 export function loadPlanets(scene) {
+    
     const createdPlanets = {};
-
     const Planets = {
         Mercury: { path: "models/Mercury.glb", scale: 100, position: [300, 0, 0] },
         Venus:   { path: "models/Venus.glb", scale: 0.2, position: [400, 0, 0] },
@@ -37,8 +53,9 @@ export function loadPlanets(scene) {
         Uranus:  { path: "models/Uranus.glb", scale: 1.0, position: [1780, 0, 0] },
         Neptune: { path: "models/Neptune.glb", scale: 1.0, position: [2100, 0, 0] },
     };
-
+    
     function setupPlanet(name, config) {
+        if (Mercury) return;
         if (createdPlanets[name]) {
             console.log(`${name} já existe!`);
             return createdPlanets[name];
@@ -59,7 +76,19 @@ export function loadPlanets(scene) {
                 }
             });
 
+            
             pivot.add(planet);
+
+           
+            if(name === "Mercury") Mercury = planet;
+            if(name === "Venus") Venus = planet;
+            if(name === "Earth") Earth = planet;
+            if(name === "Mars") Mars = planet;
+            if(name === "Jupiter") Jupiter = planet;
+            if(name === "Saturn") Saturn = planet;
+            if(name === "Uranus") Uranus = planet;
+            if(name === "Neptune") Neptune = planet;
+
         });
 
         createdPlanets[name] = pivot;

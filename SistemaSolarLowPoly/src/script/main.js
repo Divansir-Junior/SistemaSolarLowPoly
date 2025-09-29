@@ -10,7 +10,6 @@ function init() {
   loadPlanets(scene);
   animate();
  
-
     // Responsividade
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -24,8 +23,6 @@ function init() {
     animatePlanets() // Atualiza a rotação do Sol
     
   }
-
- 
 }
 
 init();
