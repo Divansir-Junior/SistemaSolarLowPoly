@@ -7,10 +7,9 @@ function init() {
   createLights(scene);
   createStars(scene);
   createSun(scene);
-  loadPlanets(scene);
+  loadPlanets(scene, camera);
   animate();
- 
-    // Responsividade
+
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -20,8 +19,7 @@ function init() {
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    animatePlanets() // Atualiza a rotação do Sol
-    
+    animatePlanets();
   }
 }
 
