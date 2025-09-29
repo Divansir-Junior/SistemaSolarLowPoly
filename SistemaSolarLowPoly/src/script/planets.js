@@ -2,9 +2,11 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'; 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { showPlanetInfo } from './popup';
 
 const loader = new GLTFLoader();
 
+// --- Variáveis globais para os planetas ---
 let sun = null;
 let Mercury = null;
 let Venus = null;
@@ -28,6 +30,8 @@ export function createSun(scene) {
 }
 
 export function animatePlanets() {
+    // Rotação dos planetas
+    // Verifica se o planeta foi carregado antes de tentar rotacioná-lo
     if (sun) sun.rotation.y += 0.002;
     if (Mercury) Mercury.rotation.y += 1000;
     if (Venus) Venus.rotation.y += 0.002;
@@ -79,8 +83,8 @@ export function loadPlanets(scene) {
             
             pivot.add(planet);
 
-           
-            if(name === "Mercury") Mercury = planet;
+           // Atribui o planeta à variável global correspondente
+            if(name === "Mercury")  Mercury = planet;
             if(name === "Venus") Venus = planet;
             if(name === "Earth") Earth = planet;
             if(name === "Mars") Mars = planet;
@@ -102,3 +106,4 @@ export function loadPlanets(scene) {
 
     return createdPlanets;
 }
+console.log(showPlanetInfo(Mercury))
