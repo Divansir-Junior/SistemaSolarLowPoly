@@ -17,6 +17,9 @@ let Saturn = null;
 let Uranus = null;
 let Neptune = null;
 
+// Pivots para órbita
+const pivots = {};
+
 // ------------------------ Sol ------------------------
 export function createSun(scene) {
     if (sun) return;
@@ -31,6 +34,8 @@ export function createSun(scene) {
 // -------------------- Animação -----------------------
 export function animatePlanets() {
     if(sun) sun.rotation.y += 0.002;
+
+    // Rotação própria
     if(Mercury) Mercury.rotation.y += 0.01;
     if(Venus) Venus.rotation.y += 0.005;
     if(Earth) Earth.rotation.y += 0.02;
@@ -39,6 +44,12 @@ export function animatePlanets() {
     if(Saturn) Saturn.rotation.y += 0.038;
     if(Uranus) Uranus.rotation.y += 0.03;
     if(Neptune) Neptune.rotation.y += 0.032;
+
+    // Rotação de órbita
+    const speeds = [0.02,0.015,0.01,0.008,0.005,0.004,0.003,0.002]; // velocidade orbital
+    Object.keys(pivots).forEach((key, idx) => {
+        pivots[key].rotation.y += speeds[idx];
+    });
 }
 
 // -------------------- Carregar planetas --------------------
@@ -46,27 +57,32 @@ export function loadPlanets(scene, camera) {
     const clickableObjects = [];
 
     const Planets = {
-        Mercury: { path: "models/Mercury.glb", scale: 100, position: [300,0,0] },
-        Venus:   { path: "models/Venus.glb", scale: 0.2, position: [400,0,0] },
-        Earth:   { path: "models/Earth and Moon.glb", scale: 322, position: [570,0,0] },
-        Mars:    { path: "models/Mars.glb", scale: 0.3, position: [715,0,0] },
-        Jupiter: { path: "models/Jupiter.glb", scale: 250, position: [1900,0,0] },
-        Saturn:  { path: "models/Saturn.glb", scale: 250, position: [1270,0,0] },
-        Uranus:  { path: "models/Uranus.glb", scale: 1.0, position: [1780,0,0] },
-        Neptune: { path: "models/Neptune.glb", scale: 1.0, position: [2100,0,0] }
+        Mercury: { path: "models/Mercury.glb", scale: 100, distance: 300 },
+        Venus:   { path: "models/Venus.glb", scale: 0.2, distance: 400 },
+        Earth:   { path: "models/Earth and Moon.glb", scale: 322, distance: 570 },
+        Mars:    { path: "models/Mars.glb", scale: 0.3, distance: 715 },
+        Jupiter: { path: "models/Jupiter.glb", scale: 250, distance: 1900 },
+        Saturn:  { path: "models/Saturn.glb", scale: 250, distance: 1270 },
+        Uranus:  { path: "models/Uranus.glb", scale: 1.0, distance: 1780 },
+        Neptune: { path: "models/Neptune.glb", scale: 1.0, distance: 2100 }
     };
 
-    Object.entries(Planets).forEach(([name, cfg]) => {
+    Object.entries(Planets).forEach(([name, cfg], idx) => {
+        // Pivot central no Sol
         const pivot = new THREE.Object3D();
-        pivot.position.set(...cfg.position);
+        pivots[name] = pivot;
+        pivot.position.set(0,0,0);
         scene.add(pivot);
 
         loader.load(cfg.path, (gltf) => {
             const planet = gltf.scene;
             planet.scale.set(cfg.scale, cfg.scale, cfg.scale);
+
+            // Posicionar planeta no raio de órbita
+            planet.position.set(cfg.distance, 0, 0);
             pivot.add(planet);
 
-            // 🔑 marcar mesh do planeta
+            // Marcar mesh do planeta
             planet.traverse(child => {
                 if(child.isMesh){
                     child.castShadow = true;
@@ -74,13 +90,13 @@ export function loadPlanets(scene, camera) {
                 }
             });
 
-            // 🌐 adicionar esfera invisível gigante para clique
+            // Esfera invisível para clique
             const clickSphere = new THREE.Mesh(
-                new THREE.SphereGeometry(cfg.scale * 1.2, 16, 16),
-                new THREE.MeshBasicMaterial({ visible: false })
+                new THREE.SphereGeometry(cfg.scale*1.5,16,16),
+                new THREE.MeshBasicMaterial({visible:false})
             );
             clickSphere.userData.planetName = name;
-            pivot.add(clickSphere);
+            planet.add(clickSphere);
             clickableObjects.push(clickSphere);
 
             // salvar referência global
