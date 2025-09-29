@@ -1,20 +1,30 @@
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+// --- Imports ---
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'; 
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 const loader = new GLTFLoader();
 
-export function createSun (scene) {
-    loader.load('models/Sun.glb', (gltf) => {
-        const sun = gltf.scene;
-        sun.scale.set(200,200,200); // Tamanho do Sol
-        sun.position.set(0,0,0); // Posição 
-        scene.add(sun);
+let sun = null;
 
+// --- Criar o Sol ---
+export function createSun(scene) {
+    if (sun) return;
+
+    loader.load('models/Sun.glb', (gltf) => {
+        sun = gltf.scene; // aqui não usa "const", senão sobrescreve a variável global
+        sun.scale.set(200, 200, 200); 
+        sun.position.set(0, 0, 0);
+        scene.add(sun);
     });
 }
 
+export function animatePlanets() {
+    if (sun) sun.rotation.y += 0.002;
+}
+
+// --- Criar os planetas ---
 export function loadPlanets(scene) {
-    const loader = new GLTFLoader();
     const createdPlanets = {};
 
     const Planets = {
@@ -24,8 +34,8 @@ export function loadPlanets(scene) {
         Mars:    { path: "models/Mars.glb", scale: 0.3, position: [715, 0, 0] },
         Jupiter: { path: "models/Jupiter.glb", scale: 250, position: [900, 0, 0] },
         Saturn:  { path: "models/Saturn.glb", scale: 250, position: [1270, 0, 0] },
-        Uranus:  { path: "models/Uranus.glb", scale: 1.0, position: [7780, 0, 0] },
-        Neptune: { path: "models/Neptune.glb", scale: 1.0, position: [7710, 0, 0] },
+        Uranus:  { path: "models/Uranus.glb", scale: 1.0, position: [1780, 0, 0] },
+        Neptune: { path: "models/Neptune.glb", scale: 1.0, position: [2100, 0, 0] },
     };
 
     function setupPlanet(name, config) {
@@ -56,10 +66,10 @@ export function loadPlanets(scene) {
         return pivot;
     }
 
-    // Criar todos os planetas de forma dinâmica
+    // Cria todos os planetas em loop
     Object.entries(Planets).forEach(([name, config]) => {
         setupPlanet(name, config);
     });
 
-    return createdPlanets; // retorna os pivots criados caso precise manipular depois
+    return createdPlanets;
 }

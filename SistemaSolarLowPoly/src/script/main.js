@@ -1,13 +1,14 @@
 import { createScene, createStars } from './scene.js';
 import { createLights } from './lights.js';
-import { createSun, loadPlanets } from './planets.js';
+import { animatePlanets, createSun, loadPlanets } from './planets.js';
 
 function init() {
   const { scene, camera, renderer } = createScene();
   createLights(scene);
   createStars(scene);
-  createSun(scene)
+  createSun(scene);
   loadPlanets(scene);
+  animate();
  
 
     // Responsividade
@@ -20,9 +21,11 @@ function init() {
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    animatePlanets() // Atualiza a rotação do Sol
+    
   }
 
-  animate();
+ 
 }
 
 init();
