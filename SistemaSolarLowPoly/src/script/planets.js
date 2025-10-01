@@ -9,6 +9,7 @@ let Mercury = null, Venus = null, Earth = null, Mars = null, Jupiter = null, Sat
 let MercuryPivot, VenusPivot, EarthPivot, MarsPivot, JupiterPivot, SaturnPivot, UranusPivot, NeptunePivot;
 
 let cameraRef = null; // 🔑 Referência da câmera
+let planetBeingFollowed = null; // 🔑 planeta que está sendo seguido pela câmera
 
 // ---------------- Criar Sol ----------------
 export function createSun(scene) {
@@ -26,14 +27,14 @@ export function loadPlanets(scene, camera) {
   cameraRef = camera;
 
   const Planets = {
-    Mercury: { path: "models/Mercury.glb", scale: 100, distance: 300, orbitSpeed: 0.02, rotSpeed: 0},
+    Mercury: { path: "models/Mercury.glb", scale: 100, distance: 300, orbitSpeed: 0.02, rotSpeed: 0 },
     Venus:   { path: "models/Venus.glb", scale: 0.2, distance: 400, orbitSpeed: 0.015, rotSpeed: 0.005 },
     Earth:   { path: "models/Earth and Moon.glb", scale: 322, distance: 570, orbitSpeed: 0.0050, rotSpeed: 0 },
     Mars:    { path: "models/Mars.glb", scale: 0.3, distance: 715, orbitSpeed: 0.0020, rotSpeed: 0 },
     Jupiter: { path: "models/Jupiter.glb", scale: 250, distance: 1100, orbitSpeed: 0.0005, rotSpeed: 0 },
     Saturn:  { path: "models/Saturn.glb", scale: 250, distance: 1300, orbitSpeed: 0.0002, rotSpeed: 0 },
     Uranus:  { path: "models/Uranus.glb", scale: 300, distance: 1600, orbitSpeed: 0.0001, rotSpeed: 0 },
-    Neptune: { path: "models/Neptune.glb", scale: 2.0, distance: 2100, orbitSpeed: 0.0001, rotSpeed:0 }
+    Neptune: { path: "models/Neptune.glb", scale: 2.0, distance: 2100, orbitSpeed: 0.00010, rotSpeed: 0 }
   };
 
   Object.entries(Planets).forEach(([name, cfg]) => {
@@ -74,7 +75,6 @@ export function animatePlanets() {
   if (UranusPivot)  UranusPivot.rotation.y  += Uranus.orbitSpeed;
   if (NeptunePivot) NeptunePivot.rotation.y += Neptune.orbitSpeed;
 
-  //aaa
   // ROTAÇÃO PRÓPRIA (planeta girando no eixo)
   if (Mercury) Mercury.rotation.y += Mercury.rotSpeed;
   if (Venus)   Venus.rotation.y   += Venus.rotSpeed;
@@ -84,6 +84,23 @@ export function animatePlanets() {
   if (Saturn)  Saturn.rotation.y  += Saturn.rotSpeed;
   if (Uranus)  Uranus.rotation.y  += Uranus.rotSpeed;
   if (Neptune) Neptune.rotation.y += Neptune.rotSpeed;
+
+  // 📌 Se a câmera está seguindo um planeta, atualiza posição
+  if (planetBeingFollowed && cameraRef) {
+    const targetPos = new THREE.Vector3();
+    planetBeingFollowed.getWorldPosition(targetPos);
+
+    let offset = 200;
+    if (planetBeingFollowed === Jupiter || planetBeingFollowed === Saturn) offset = 600;
+    if (planetBeingFollowed === Uranus  || planetBeingFollowed === Neptune) offset = 400;
+
+    cameraRef.position.lerp(
+      targetPos.clone().add(new THREE.Vector3(offset, offset * 0.5, offset)),
+      0.05 // suavidade
+    );
+
+    cameraRef.lookAt(targetPos);
+  }
 }
 
 // ---------------- Focar câmera em planeta ----------------
@@ -94,27 +111,16 @@ export function focusOnPlanet(name) {
   const planet = map[name];
   if (!planet) return;
 
-  const targetPos = new THREE.Vector3();
-  planet.getWorldPosition(targetPos);
+  // agora a câmera vai seguir o planeta continuamente
+  planetBeingFollowed = planet;
+}
 
-  // Ajuste de distância dependendo do tamanho do planeta
-  let offset = 200;
-  if (name === "Jupiter" || name === "Saturn") offset = 600;
-  if (name === "Uranus" || name === "Neptune") offset = 400;
+// ---------------- Resetar câmera ----------------
+export function resetCamera() {
+  planetBeingFollowed = null;
+  if (!cameraRef) return;
 
-  targetPos.add(new THREE.Vector3(offset, offset * 0.5, offset));
-
-  let progress = 0;
-  const startPos = cameraRef.position.clone();
-
-  function animateMove() {
-    progress += 0.02;
-    cameraRef.position.lerpVectors(startPos, targetPos, progress);
-
-    if (progress < 1) {
-      requestAnimationFrame(animateMove);
-    }
-  }
-
-  animateMove();
+  // volta para uma visão geral (vista de cima)
+  cameraRef.position.set(950, 500, 950);
+  cameraRef.lookAt(0, 0, 0);
 }
