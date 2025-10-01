@@ -26,14 +26,14 @@ export function loadPlanets(scene, camera) {
   cameraRef = camera;
 
   const Planets = {
-    Mercury: { path: "models/Mercury.glb", scale: 100, distance: 300, orbitSpeed: 0.02, rotSpeed: 0.01 },
+    Mercury: { path: "models/Mercury.glb", scale: 100, distance: 300, orbitSpeed: 0.02, rotSpeed: 0},
     Venus:   { path: "models/Venus.glb", scale: 0.2, distance: 400, orbitSpeed: 0.015, rotSpeed: 0.005 },
-    Earth:   { path: "models/Earth and Moon.glb", scale: 322, distance: 570, orbitSpeed: 0.01, rotSpeed: 0.02 },
-    Mars:    { path: "models/Mars.glb", scale: 0.3, distance: 715, orbitSpeed: 0.008, rotSpeed: 0.018 },
-    Jupiter: { path: "models/Jupiter.glb", scale: 250, distance: 1900, orbitSpeed: 0.004, rotSpeed: 0.04 },
-    Saturn:  { path: "models/Saturn.glb", scale: 250, distance: 1270, orbitSpeed: 0.003, rotSpeed: 0.038 },
-    Uranus:  { path: "models/Uranus.glb", scale: 1.0, distance: 1780, orbitSpeed: 0.002, rotSpeed: 0.03 },
-    Neptune: { path: "models/Neptune.glb", scale: 1.0, distance: 2100, orbitSpeed: 0.0015, rotSpeed: 0.032 }
+    Earth:   { path: "models/Earth and Moon.glb", scale: 322, distance: 570, orbitSpeed: 0.0050, rotSpeed: 0 },
+    Mars:    { path: "models/Mars.glb", scale: 0.3, distance: 715, orbitSpeed: 0.0020, rotSpeed: 0 },
+    Jupiter: { path: "models/Jupiter.glb", scale: 250, distance: 1100, orbitSpeed: 0.0005, rotSpeed: 0 },
+    Saturn:  { path: "models/Saturn.glb", scale: 250, distance: 1300, orbitSpeed: 0.0002, rotSpeed: 0 },
+    Uranus:  { path: "models/Uranus.glb", scale: 300, distance: 1600, orbitSpeed: 0.0001, rotSpeed: 0 },
+    Neptune: { path: "models/Neptune.glb", scale: 2.0, distance: 2100, orbitSpeed: 0.0001, rotSpeed:0 }
   };
 
   Object.entries(Planets).forEach(([name, cfg]) => {
