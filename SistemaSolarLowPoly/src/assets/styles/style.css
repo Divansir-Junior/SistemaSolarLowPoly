@@ -17,27 +17,123 @@ body {
   background-color: black;
 }
 
-
-.container { 
+/* --- Menu dos planetas ---- */
+.container {
   display: none;
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0.9);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(0, 0, 0, 0.6); 
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+  border: 1px solid rgb(28, 25, 25);
 }
 
-h1{
+/* --- Animação de entrada do Menu ---- */
+.container.show {
+ max-height: 500px;
+  border-radius: 12px; 
+  opacity: 1;
+  transform: scaleY(1);
+  
+}
+
+/* --- Botões dos planetas ---- */
+.container h1{
   color: white;
   text-align: center;
   font-size: 24px;
   margin-top: 20px;
 }
 
+/* --- ÍCONE do Menu ---- */
 .menuIcon {
   position: fixed;
-  top: 30px;
-  left: 20px;
+  top: 40px;
+  left: 40px;
   width: 40px;
   height: 40px;
   cursor: pointer;
   z-index: 1000;
+}
+
+/* --- Efeito hover nos botões dos planetas ---- */
+
+h1[data-planet="Mercury"]:hover {
+  background: linear-gradient(90deg, #504E51,#97979F,#CECCD1,#B5A7A7);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;         
+  font-size: 28px;         
+  cursor: pointer;        
+  transition: all 0.3s ease; 
+}
+
+h1[data-planet="Venus"]:hover {
+   background: linear-gradient(90deg, #8B91A1,#BBB7AB,#DDD8D4,	#EFEFEF,	#663926,#8E6A5A);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;           
+  font-size: 28px;         
+  cursor: pointer;        
+  transition: all 0.3s ease; 
+}
+
+h1[data-planet="Earth"]:hover {
+  background: linear-gradient(90deg,#3B5D38,#8CB1DE,#3B5D38,#3B5D38,#3C4258);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;     
+  font-size: 28px;         
+  cursor: pointer;        
+  transition: all 0.3s ease; 
+}
+
+h1[data-planet="Mars"]:hover {
+ background: linear-gradient(90deg, #99857A,#C67B5C,#E27B58,	#FF9D6F,	#663926,#8E6A5A);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;      
+  font-size: 28px;         
+  background-color: rgba(255, 70, 2, 0.2); 
+  cursor: pointer;        
+  transition: all 0.3s ease; 
+}
+
+h1[data-planet="Jupiter"]:hover {     
+   background: linear-gradient(90deg, #ebf3f6,#e3dccb,#d8ca9d,	#a59186,	#c99039);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  font-size: 28px;         
+  cursor: pointer;        
+  transition: all 0.3s ease; 
+}
+
+h1[data-planet="Saturn"]:hover {     
+  background: linear-gradient(90deg, #343E47,#7B7869,#A49B72,	#C5AB6E,	#C3A171);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  font-size: 28px;         
+  cursor: pointer;        
+  transition: all 0.3s ease; 
+}
+
+h1[data-planet="Uranus"]:hover {     
+  background: linear-gradient(90deg, #D5FBFC,#BBE1E4,#93B8BE,#65868B,#00CED1);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  font-size: 28px;         
+  cursor: pointer;        
+  transition: all 0.3s ease; 
+}
+
+h1[data-planet="Neptune"]:hover {     
+  background: linear-gradient(90deg, #212354,#3E54E8,#3E66F9,#6081FF,#89F3FF);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  font-size: 28px;         
+  cursor: pointer;        
+  transition: all 0.3s ease; 
 }

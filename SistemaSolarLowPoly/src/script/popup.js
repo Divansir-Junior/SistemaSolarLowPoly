@@ -14,10 +14,17 @@ export function setupPlanetButtons() {
 // ---------------- Toggle menu  ----------------
 export function setupMenuToggle() {
   const menuIcon = document.getElementById("toggleMenu");
-  let menuVisible = false;
   const menu = document.querySelector(".container");
-  menuIcon.addEventListener("click", () =>  {
+  let menuVisible = false;
+
+  menuIcon.addEventListener("click", () => {
     menuVisible = !menuVisible;
-    menu.style.display = menuVisible ? "flex" : "none";
+
+    if (menuVisible) {
+      menu.classList.add("show");
+      menu.style.display = menuVisible ? "flex" : "none";
+    } else {
+      menu.classList.remove("show");
+    }
   });
 }
