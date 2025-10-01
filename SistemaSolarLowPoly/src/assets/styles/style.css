@@ -19,7 +19,7 @@ body {
 
 
 .container { 
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
@@ -34,7 +34,7 @@ h1{
 
 .menuIcon {
   position: fixed;
-  top: 20px;
+  top: 30px;
   left: 20px;
   width: 40px;
   height: 40px;
