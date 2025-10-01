@@ -1,6 +1,7 @@
 import { createScene, createStars } from './scene.js';
 import { createLights } from './lights.js';
 import { animatePlanets, createSun, loadPlanets } from './planets.js';
+import { setupPlanetButtons } from './popup.js';
 
 function init() {
   const { scene, camera, renderer } = createScene();
@@ -8,6 +9,9 @@ function init() {
   createStars(scene);
   createSun(scene);
   loadPlanets(scene, camera);
+
+  setupPlanetButtons(); // 🔑 habilita os cliques nos H1
+
   animate();
 
   window.addEventListener('resize', () => {

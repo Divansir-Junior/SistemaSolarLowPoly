@@ -18,7 +18,14 @@ body {
 }
 
 
-#planet-title {
+.container { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+h1{
   color: white;
   text-align: center;
   font-size: 24px;
