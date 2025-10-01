@@ -3,7 +3,13 @@
     <img src="https://cdn-icons-png.flaticon.com/128/3049/3049498.png">
 </div>
 <hr>
-<h2>The idea of this project is to recreate our solar system in a simple way, but with the highest possible <strong>accuracy</strong></h2>
+<h2>The idea of this project is to recreate our solar system in a simple way, but with the highest possible accuracy.You can view and interact with the project:<a href="https://sistema-solar-low-poly.vercel.app/">
+  <img src="https://img.shields.io/badge/Here-Visit-blue?style=for-the-badge&logo=github&logoColor=white" 
+       alt="Visit Here Badge" />
+</a></h2>
+
+
+
 <p>The project includes</p>
 
 <ul>
